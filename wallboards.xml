@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+   <name>Wallboards for GLPI</name>
+   <key>wallboards</key>
+   <state>stable</state>
+   <logo>https://forge.indepnet.net/svn/wallboards/wallboards.png</logo>
+   <description>
+      <short>
+         <fr><![CDATA[Dashboard. Ce plugin permet de vue les tableaux de statistiques et rapports de GLPI.<br />-Utilisable depuis le helpdesk.<br />-Ajout de commentaires]]></fr>
+         <en><![CDATA[Dashboard. This plugin allows view statistics charts and reports from GLPI.<br />-Can be used with helpdesk.]]></en>
+      </short>
+      <long>
+         <fr><![CDATA[Dashboard. Ce plugin permet de vue les tableaux de statistiques et rapports de GLPI.<br />-Utilisable depuis le helpdesk.<br />-Ajout de commentaires]]></fr>
+         <en><![CDATA[Dashboard. This plugin allows view statistics charts and reports from GLPI.<br />-Can be used with helpdesk.]]></en>
+      </long>
+   </description>
+   <homepage>https://forge.indepnet.net/projects/wallboards</homepage>
+   <download>https://forge.indepnet.net/projects/wallboards/files</download>
+   <authors>
+      <author>Thiago Passamani</author>
+   </authors>
+   <versions>
+       <version>
+          <num>0.0.6</num>
+          <compatibility>0.85.1</compatibility>
+      </version>
+   </versions>
+   <langs>
+   	<lang>pt_BR</lang>
+      <lang>en_GB</lang>
+      <lang>fr_FR</lang>
+    </langs>
+   <license><![CDATA[AGPL v3+]]></license>
+      <tags>
+         <fr>
+	        <tag>dashboard</tag>
+            <tag>TV</tag>
+         </fr>
+         <en>
+            <tag>dashboard</tag>
+            <tag>TV</tag>
+         </en>
+   </tags>
+</root>
