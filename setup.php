@@ -30,7 +30,7 @@ function plugin_version_wallboards()
     'version'         =>  WALLBOARDS_VERSION,
     'author'          => '<a href="mailto:thiagopassamani@gmail.com">Thiago Passamani</a>',
     'license'         => 'GPLv2+',
-    'homepage'        => 'https://github.com/thiagopassamani/wallboards-for-glpi',
+    'homepage'        => 'https://github.com/thiagopassamani/wallboards',
     'minGlpiVersion'  => '0.85.1'
   );
 }
@@ -74,24 +74,22 @@ function plugin_wallboards_check_config( $verbose = false )
  */
 function plugin_init_wallboards()
 {
-    global $PLUGIN_HOOKS, $CFG_GLPI, $LANG;
+    global $PLUGIN_HOOKS, $CFG_GLPI;
 
     $plugin = new Plugin();
 
-    //Plugin::registerClass('WallboardsMenu');
     Plugin::registerClass('PluginWallboardsMenu', 'PluginWallboardsConfig');
 
     $PLUGIN_HOOKS['csrf_compliant']['wallboards'] = true;
-        
+    $PLUGIN_HOOKS['menu_toadd']['wallboards'] = array('plugins' => 'PluginWallboardsMenu',
+                                                      'config'   => 'PluginWallboardsConfig');
     // Config page
     if (Session::haveRight('config',UPDATE))
     {
         $PLUGIN_HOOKS['config_page']['wallboards'] = 'front/config.php';
     }   
 
-    $PLUGIN_HOOKS['menu_toadd']['wallboards'] = array('plugins' => 'PluginWallboardsMenu',
-                                                      'config'   => 'PluginWallboardsConfig');        
-    $PLUGIN_HOOKS['submenu_entry']['wallboards'] = array('plugins'   => 'PluginWallboardsConfig');
-    $PLUGIN_HOOKS["helpdesk_menu_entry"]['wallboards'] = true;
+    /* Thiago Passamnai - Exibir no painel do usuário */
+    //$PLUGIN_HOOKS["helpdesk_menu_entry"]['wallboards'] = true;
 }
 ?>

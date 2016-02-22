@@ -3,7 +3,7 @@
    <name>Wallboards for GLPI</name>
    <key>wallboards</key>
    <state>stable</state>
-   <logo>https://forge.indepnet.net/svn/wallboards/wallboards.png</logo>
+   <logo>https://https://github.com/thiagopassamani/wallboards/wallboards.png</logo>
    <description>
       <short>
          <fr><![CDATA[Dashboard. Ce plugin permet de vue les tableaux de statistiques et rapports de GLPI.<br />-Utilisable depuis le helpdesk.<br />-Ajout de commentaires]]></fr>
@@ -14,15 +14,19 @@
          <en><![CDATA[Dashboard. This plugin allows view statistics charts and reports from GLPI.<br />-Can be used with helpdesk.]]></en>
       </long>
    </description>
-   <homepage>https://forge.indepnet.net/projects/wallboards</homepage>
-   <download>https://forge.indepnet.net/projects/wallboards/files</download>
+   <homepage>https://github.com/thiagopassamani/wallboards/</homepage>
+   <download>https://github.com/thiagopassamani/wallboards/releases</download>
+   <issues>https://github.com/thiagopassamani/wallboards/issues</issues>
+   <readme>https://github.com/thiagopassamani/wallboards/master/README.md</readme>
+
    <authors>
       <author>Thiago Passamani</author>
    </authors>
    <versions>
        <version>
-          <num>0.0.6</num>
-          <compatibility>0.85.1</compatibility>
+          <num>0.0.1</num>
+          <compatibility>0.85</compatibility>
+          <compatibility>0.90</compatibility>
       </version>
    </versions>
    <langs>
@@ -33,12 +37,17 @@
    <license><![CDATA[AGPL v3+]]></license>
       <tags>
          <fr>
-	        <tag>dashboard</tag>
+	        <tag>wallboards</tag>
             <tag>TV</tag>
          </fr>
          <en>
-            <tag>dashboard</tag>
+            <tag>wallboards</tag>
             <tag>TV</tag>
          </en>
+         <pt>
+            <tag>Wallboards</tag>
+            <tag>TV</tag>
+            <tag>Gráficos</tag>
+         </pt>
    </tags>
 </root>
