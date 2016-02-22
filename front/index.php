@@ -18,7 +18,7 @@ include_once (GLPI_ROOT . "/inc/dbconnection.class.php");
 <title><?php echo __('Wallboards for GLPI','wallboards'); ?></title>
 <meta charset="utf-8"/>
 <meta name="author" content="Thiago Passamani <thiagopassamani@gmail.com>" />
-<meta name="description" content="Plugin para GLPI: Dashboard TV">
+<meta name="description" content="Plugin para GLPI: Wallboards for GLPI">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 <link rel="shortcut icon" type="images/x-icon" href="../../../pics/favicon.ico">
