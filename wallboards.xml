@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="UTF-8"?>
 <root>
    <name>Wallboards for GLPI</name>
    <key>wallboards</key>
@@ -49,10 +48,5 @@
             <tag>TV</tag>
             <tag>Gráficos</tag>
          </pt>
-   </tags>
-      <screenshots>
-               <screenshot>http://link/to/your/screenshot</screenshot>
-               <screenshot>http://link/to/your/screenshot</screenshot>
-               <screenshot>...</screenshot>
-            </screenshots>	
+   </tags>	
 </root>
