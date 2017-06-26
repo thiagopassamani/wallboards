@@ -2,7 +2,7 @@
 <root>
    <name>Wallboards for GLPI</name>
    <key>wallboards</key>
-   <state>stable</state>
+   <state>alpha</state>
    <logo>https://https://github.com/thiagopassamani/wallboards/wallboards.png</logo>
    <description>
       <short>
@@ -26,7 +26,7 @@
        <version>
           <num>0.0.1</num>
           <compatibility>0.85</compatibility>
-          <compatibility>0.90</compatibility>
+          <compatibility>0.90</compatibility>	       
       </version>
    </versions>
    <langs>
@@ -50,4 +50,9 @@
             <tag>Gráficos</tag>
          </pt>
    </tags>
+      <screenshots>
+               <screenshot>http://link/to/your/screenshot</screenshot>
+               <screenshot>http://link/to/your/screenshot</screenshot>
+               <screenshot>...</screenshot>
+            </screenshots>	
 </root>
