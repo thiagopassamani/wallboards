@@ -5,17 +5,25 @@ function plugin_wallboards_install(){
 	global $DB;
 
 	/* Criando as tabelas necessárias para o plugin wallboards */
-	$query_c_wallboards  = "CREATE TABLE IF NOT EXISTS `glpi_plugin_wallboards` (
-							`id` INT(11) NOT NULL auto_increment, 
-							`plugin_name` VARCHAR(20) NOT NULL, 
-							`plugin_description` TEXT NOT NULL, 
-							`plugin_version` CHAR(10) NOT NULL, 
-							`plugin_language` VARCHAR(5) NOT NULL, 
-							`plugin_dev` VARCHAR(50) NOT NULL, 
-							`plugin_url` VARCHAR(120) NOT NULL, 
-							`plugin_install` DATETIME NOT NULL, 
-							PRIMARY KEY (`id`)
-						) COLLATE='utf8_unicode_ci' ENGINE=InnoDB; ";
+	$query_c_wallboards  = "CREATE TABLE IF NOT EXISTS `glpi_plugin_wallboards_configs` (
+	         					`id` INT(11) NOT NULL AUTO_INCREMENT,
+	         					`google_voice` TINYINT(1) NULL DEFAULT '1',
+	         					`show_day` INT(3) NOT NULL ,
+	         					`time_update` INT(10) NOT NULL ,
+	         					`kpi_meta` INT(2) NOT NULL ,
+            					`date_mod` TIMESTAMP NULL DEFAULT NULL,
+	         					`comment` TEXT NULL,
+	         					PRIMARY KEY (`id`)
+	         				) COLLATE='utf8_unicode_ci' ENGINE=MyISAM;";
+
+	/*"CREATE TABLE IF NOT EXISTS `glpi_plugin_wallboards_configs` (
+  								`id` int(11) NOT NULL AUTO_INCREMENT,
+  								`context` varchar(150) COLLATE utf8_unicode_ci DEFAULT NULL,
+  								`name` varchar(150) COLLATE utf8_unicode_ci DEFAULT NULL,
+  								`value` text COLLATE utf8_unicode_ci,
+  								PRIMARY KEY (`id`),
+  								UNIQUE KEY `unicity` (`context`,`name`)
+							) COLLATE='utf8_unicode_ci' ENGINE=MyISAM;";*/
 
 	$query_c_wallboards_status  = "CREATE TABLE IF NOT EXISTS `glpi_plugin_wallboards_ticket_status` ( 
 									`status` INT(11) NOT NULL, 
@@ -23,11 +31,15 @@ function plugin_wallboards_install(){
 									`status_on_ticket` VARCHAR(50) NOT NULL, 
 									`order` INT(11) NOT NULL,
 									PRIMARY KEY (`status`)
-								) COLLATE='utf8_unicode_ci' ENGINE=InnoDB; ";
+								) COLLATE='utf8_unicode_ci' ENGINE=MyISAM; ";
 
 	/* Insere as informações do plugin */
-	$query_i_wallboards = "INSERT IGNORE INTO `glpi_plugin_wallboards` (`id`, `plugin_name`, `plugin_description`, `plugin_version`, `plugin_language`, `plugin_dev`, `plugin_url`, `plugin_install`) 
-	VALUES (0, 'wallboards', 'Plugin desenvolvido para visualizar informações do GLPI em uma dashboard na TV.', '0.2.0', 'pt-BR', 'Thiago Passamani', 'http://www.thiagopassamani.com.br', NOW() ); ";
+	$query_i_wallboards = "INSERT IGNORE INTO `glpi_plugin_wallboards_configs` (`google_voice`, `show_day`, `kpi_meta`, `time_update`, `date_mod`, `comment`) VALUES (1, 180, 85, 6000, '2016-05-20 16:07:33', 'Teste'); ";
+	/*$query_i_wallboards = "INSERT IGNORE INTO `glpi_plugin_wallboards_configs` (`id`, `context`, `name`, `value`) VALUES
+								(1, 'plugin', 'version', '0.0.1'),
+								(2, 'plugin', 'description', 'Plugin desenvolvido para visualizar informações do GLPI em uma dashboard na TV.'),
+								(3, 'plugin', 'author', 'Thiago Passamani <thiagopassamani@gmail.com>'),
+								(4, 'plugin', 'language', 'pt_BR'); ";*/
 	
 	$query_i_wallboards_status = " INSERT IGNORE INTO `glpi_plugin_wallboards_ticket_status` (`status`, `name`, `status_on_ticket`, `order`) 
 	VALUES  (1, 'Novo', 'INCOMING', 1), 
@@ -140,22 +152,25 @@ function plugin_wallboards_install(){
 	AND (MONTH(gt.date) = MONTH(NOW()) AND YEAR(gt.date) = YEAR(NOW()))
 	AND gt.status = 1; ";
 
-	if ( TableExists("glpi_plugin_wallboards") )
+	if ( TableExists("glpi_plugin_wallboards_configs") )
 	{		
-		$tables = array ( "glpi_plugin_wallboards",
-						  "glpi_plugin_wallboards_ticket_status",
-						  "glpi_plugin_wallboards_view_tech",
-						  "glpi_plugin_wallboards_view_last_tickets",
-						  "glpi_plugin_wallboards_view_news_tickets",
-						  "glpi_plugin_wallboards_view_global_tickets",
-						  "glpi_plugin_wallboards_view_now_tickets",
-						  "glpi_plugin_wallboards_view_analytics" );
+		$prefix = "glpi_plugin_wallboards";
+
+		$tables = array ( $prefix."_configs",
+						  $prefix."_ticket_status",
+						  $prefix."_view_tech",
+						  $prefix."_view_last_tickets",
+						  $prefix."_view_news_tickets",
+						  $prefix."_view_global_tickets",
+						  $prefix."_view_now_tickets",
+						  $prefix."_view_analytics"
+						);
 
 		foreach ($tables as $table)
    		{
    			// Exclui as tabelas e views
    			$query_dropOrDie = "DROP TABLE IF EXISTS  $table";
-      		$DB->queryOrDie( $query_dropOrDie, 'Error droping table on MySQL.' );
+      		$DB->queryOrDie( $query_dropOrDie, 'Error droping table [ $table ] on MySQL.' );
    		}        
     }
     else
@@ -185,7 +200,7 @@ function plugin_wallboards_uninstall()
 {
 	global $DB;
 
-	$tables = array ( "glpi_plugin_wallboards", 
+	$tables = array ( "glpi_plugin_wallboards_configs", 
 					  "glpi_plugin_wallboards_ticket_status",
 					  "glpi_plugin_wallboards_view_tech",
 					  "glpi_plugin_wallboards_view_last_tickets",
@@ -194,7 +209,7 @@ function plugin_wallboards_uninstall()
 					  "glpi_plugin_wallboards_view_now_tickets",
 					  "glpi_plugin_wallboards_view_analytics" );
 
-	if ( TableExists("glpi_plugin_wallboards") )
+	if ( TableExists("glpi_plugin_wallboards_configs") )
 	{
 		foreach ($tables as $table)
    		{

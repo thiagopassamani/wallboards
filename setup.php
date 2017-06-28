@@ -22,17 +22,16 @@ if (!defined('WALLBOARDS_VERSION')) define('WALLBOARDS_VERSION', '0.0.1'); // Ve
  */
 function plugin_version_wallboards()
 {
-  global $DB, $LANG;
+  	global $DB, $LANG;
   
-  return array
-  (
-    'name'            => __('Wallboards for GLPI','wallboards'),
-    'version'         =>  WALLBOARDS_VERSION,
-    'author'          => '<a href="mailto:thiagopassamani@gmail.com">Thiago Passamani</a>',
-    'license'         => 'GPLv2+',
-    'homepage'        => 'https://github.com/thiagopassamani/wallboards',
-    'minGlpiVersion'  => '0.85.1'
-  );
+  	return array(
+    	'name'            => __('Wallboards for GLPI','wallboards'),
+    	'version'         =>  WALLBOARDS_VERSION,
+    	'author'          => '<a href="mailto:thiagopassamani@gmail.com">Thiago Passamani</a>',
+    	'license'         => 'GPLv2+',
+    	'homepage'        => 'https://github.com/thiagopassamani/wallboards',
+    	'minGlpiVersion'  => '0.85.1'
+  	);
 }
 
 /**
@@ -40,14 +39,14 @@ function plugin_version_wallboards()
  */
 function plugin_wallboards_check_prerequisites()
 {
-  if (GLPI_VERSION >= '0.85.1')
-  {
-    return true;
-  }
-  else
-  {
-    echo "GLPI version not compatible, need > 0.85.1";
-  }
+	if (GLPI_VERSION >= '0.85.1')
+  	{
+	    return true;
+  	}
+  	else
+  	{
+	    echo "GLPI version not compatible, need > 0.85.1";
+  	}
 }
 
 /**
@@ -78,18 +77,28 @@ function plugin_init_wallboards()
 
     $plugin = new Plugin();
 
-    Plugin::registerClass('PluginWallboardsMenu', 'PluginWallboardsConfig');
+    Plugin::registerClass('PluginWallboardsMenu');
+    //Plugin::registerClass('PluginWallboardsMenu','PluginWallboardsConfig');
 
     $PLUGIN_HOOKS['csrf_compliant']['wallboards'] = true;
-    $PLUGIN_HOOKS['menu_toadd']['wallboards'] = array('plugins' => 'PluginWallboardsMenu',
-                                                      'config'   => 'PluginWallboardsConfig');
+    $PLUGIN_HOOKS['menu_toadd']['wallboards'] = array('plugins' => 'PluginWallboardsMenu');
+    //$PLUGIN_HOOKS['menu_toadd']['wallboards'] = array('plugins' => 'PluginWallboardsMenu', 'config'   => 'PluginWallboardsConfig');
+    
     // Config page
-    if (Session::haveRight('config',UPDATE))
+    /* if (Session::haveRight('config',UPDATE))
     {
-        $PLUGIN_HOOKS['config_page']['wallboards'] = 'front/config.php';
-    }   
+        $PLUGIN_HOOKS['config_page']['wallboards'] = 'front/config.form.php';
+    } */
 
-    /* Thiago Passamnai - Exibir no painel do usuário */
+    $conf=new Config ;
+    
+    if ($conf->canUpdate())
+    {
+      Plugin::registerClass('PluginWallboardsConfig', array('addtabon' => 'Config'));
+      $PLUGIN_HOOKS['config_page']['wallboards'] = 'front/config.form.php';
+    }
+  
+     /* Thiago Passamnai - Exibir no painel do usuário */
     //$PLUGIN_HOOKS["helpdesk_menu_entry"]['wallboards'] = true;
 }
 ?>

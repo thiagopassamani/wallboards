@@ -1,7 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <root>
    <name>Wallboards for GLPI</name>
    <key>wallboards</key>
-   <state>alpha</state>
+   <state>stable</state>
    <logo>https://https://github.com/thiagopassamani/wallboards/wallboards.png</logo>
    <description>
       <short>
@@ -25,7 +26,7 @@
        <version>
           <num>0.0.1</num>
           <compatibility>0.85</compatibility>
-          <compatibility>0.90</compatibility>	       
+          <compatibility>0.90</compatibility>
       </version>
    </versions>
    <langs>
@@ -48,5 +49,5 @@
             <tag>TV</tag>
             <tag>Gráficos</tag>
          </pt>
-   </tags>	
+   </tags>
 </root>
